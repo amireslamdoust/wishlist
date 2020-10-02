@@ -13,7 +13,6 @@
 
 # misc
 .DS_Store
-.env
 .env.production
 .env.staging
 .env.test
@@ -30,5 +29,3 @@ yarn.lock*
 /cypress/videos
 /cypress/screenshots
 
-# data
-/src/data/

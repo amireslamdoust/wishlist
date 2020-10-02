@@ -11,4 +11,9 @@ export default [
     component: loadable(() => import('./pages/Setting')),
     exact: true,
   },
+  {
+    path: '/favorites',
+    component: loadable(() => import('./pages/Favorites')),
+    exact: true,
+  },
 ]

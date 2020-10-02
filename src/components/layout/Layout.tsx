@@ -6,10 +6,7 @@ type LayoutProps = {
 
 const Layout = ({ children }: LayoutProps) => {
   return (
-    <div
-      className="bg-white antialiased font-sans overflow-auto"
-      // style={{ pointerEvents: 'unset', cursor: 'none' }}
-    >
+    <div className="bg-black antialiased font-sans overflow-auto">
       <div className="relative">{children}</div>
     </div>
   )

@@ -6,7 +6,7 @@ type LayoutProps = {
 
 const Layout = ({ children }: LayoutProps) => {
   return (
-    <div className="bg-black antialiased font-sans overflow-auto">
+    <div className="bg-black antialiased font-sans overflow-auto h-screen">
       <div className="relative">{children}</div>
     </div>
   )

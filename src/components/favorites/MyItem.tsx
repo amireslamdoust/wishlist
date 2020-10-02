@@ -1,5 +1,6 @@
-import React, { useCallback, useContext, useEffect, useRef } from 'react'
-import { ListContext } from '../../context/ListContext'
+import React, { useEffect, useRef } from 'react'
+import { useManageWishList } from '../../hooks/useManageWishList'
+import Item from './Item'
 
 interface Props {
   index: number
@@ -10,30 +11,17 @@ interface Props {
 }
 const MyItem: React.FC<Props> = ({ index, channel, focus, setFocus, selectedSide }) => {
   const ref = useRef(document.createElement('li'))
-  const { items, setItems } = useContext(ListContext)
+  const { handleSelect } = useManageWishList(channel, setFocus, index)
   useEffect(() => {
     if (focus && ref !== null) {
       ref.current.focus()
     }
   }, [focus])
 
-  const handleSelect = useCallback(() => {
-    if (items.find((i: any) => i.cid === channel.cid)) {
-      const removeIndex = items
-        .map(function (i: any) {
-          return i.cid
-        })
-        .indexOf(channel.cid)
-      items.splice(removeIndex, 1)
-    }
-    setItems([...items])
-    setFocus(index)
-  }, [index, setFocus, channel, items, setItems])
-
   return (
     <li
-      className={` my-4 text-white py-6 border-0 capitalize focus:border-opacity-0 outline-none shadow-2xl rounded-lg px-24 ${
-        selectedSide && 'focus:bg-orange-700'
+      className={`border border-black capitalize h-full outline-none bg-gray-800 text-white w-full ${
+        selectedSide && 'focus:bg-orange-700 focus:border-white'
       }`}
       tabIndex={focus ? 0 : -1}
       role="button"
@@ -41,13 +29,7 @@ const MyItem: React.FC<Props> = ({ index, channel, focus, setFocus, selectedSide
       onClick={handleSelect}
       onKeyPress={handleSelect}
     >
-      <p>{index + 1}</p>
-      <p>{channel.data.title}</p>
-      <img
-        alt=""
-        src={`https://images.zattic.com/logos/${channel.data.logo_token}/white/240x135.png`}
-      />
-      <hr />
+      <Item index={index} title={channel.data.title} logo={channel.data.logo_token} />
     </li>
   )
 }
